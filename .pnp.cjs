@@ -40,8 +40,10 @@ const RAW_RUNTIME_STATE =
           ["eslint-plugin-react-hooks", "virtual:97377d34c56a5412352ef20a68b7b9c597424b52160ae93c13e43d8bde1d2cbcb278f018a9fda42e96b3734f938cb81096b2a4dc17b62e538eb309cfd1f93975#npm:7.0.1"],\
           ["eslint-plugin-react-refresh", "virtual:97377d34c56a5412352ef20a68b7b9c597424b52160ae93c13e43d8bde1d2cbcb278f018a9fda42e96b3734f938cb81096b2a4dc17b62e538eb309cfd1f93975#npm:0.4.26"],\
           ["globals", "npm:16.5.0"],\
+          ["jszip", "npm:3.10.1"],\
           ["lucide-react", "virtual:97377d34c56a5412352ef20a68b7b9c597424b52160ae93c13e43d8bde1d2cbcb278f018a9fda42e96b3734f938cb81096b2a4dc17b62e538eb309cfd1f93975#npm:0.563.0"],\
           ["pdf-to-image", "workspace:."],\
+          ["pdfjs-dist", "npm:5.4.624"],\
           ["react", "npm:19.2.4"],\
           ["react-dom", "virtual:97377d34c56a5412352ef20a68b7b9c597424b52160ae93c13e43d8bde1d2cbcb278f018a9fda42e96b3734f938cb81096b2a4dc17b62e538eb309cfd1f93975#npm:19.2.4"],\
           ["tailwind-merge", "npm:3.4.0"],\
@@ -804,6 +806,125 @@ const RAW_RUNTIME_STATE =
           ["@jridgewell/resolve-uri", "npm:3.1.2"],\
           ["@jridgewell/sourcemap-codec", "npm:1.5.5"],\
           ["@jridgewell/trace-mapping", "npm:0.3.31"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@napi-rs/canvas", [\
+      ["npm:0.1.89", {\
+        "packageLocation": "../../Users/IBST_JAR/AppData/Local/Yarn/Berry/cache/@napi-rs-canvas-npm-0.1.89-1fe2dbe696-10c0.zip/node_modules/@napi-rs/canvas/",\
+        "packageDependencies": [\
+          ["@napi-rs/canvas", "npm:0.1.89"],\
+          ["@napi-rs/canvas-android-arm64", "npm:0.1.89"],\
+          ["@napi-rs/canvas-darwin-arm64", "npm:0.1.89"],\
+          ["@napi-rs/canvas-darwin-x64", "npm:0.1.89"],\
+          ["@napi-rs/canvas-linux-arm-gnueabihf", "npm:0.1.89"],\
+          ["@napi-rs/canvas-linux-arm64-gnu", "npm:0.1.89"],\
+          ["@napi-rs/canvas-linux-arm64-musl", "npm:0.1.89"],\
+          ["@napi-rs/canvas-linux-riscv64-gnu", "npm:0.1.89"],\
+          ["@napi-rs/canvas-linux-x64-gnu", "npm:0.1.89"],\
+          ["@napi-rs/canvas-linux-x64-musl", "npm:0.1.89"],\
+          ["@napi-rs/canvas-win32-arm64-msvc", "npm:0.1.89"],\
+          ["@napi-rs/canvas-win32-x64-msvc", "npm:0.1.89"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@napi-rs/canvas-android-arm64", [\
+      ["npm:0.1.89", {\
+        "packageLocation": "./.yarn/unplugged/@napi-rs-canvas-android-arm64-npm-0.1.89-cf45d1a6fe/node_modules/@napi-rs/canvas-android-arm64/",\
+        "packageDependencies": [\
+          ["@napi-rs/canvas-android-arm64", "npm:0.1.89"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@napi-rs/canvas-darwin-arm64", [\
+      ["npm:0.1.89", {\
+        "packageLocation": "./.yarn/unplugged/@napi-rs-canvas-darwin-arm64-npm-0.1.89-12b2e73554/node_modules/@napi-rs/canvas-darwin-arm64/",\
+        "packageDependencies": [\
+          ["@napi-rs/canvas-darwin-arm64", "npm:0.1.89"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@napi-rs/canvas-darwin-x64", [\
+      ["npm:0.1.89", {\
+        "packageLocation": "./.yarn/unplugged/@napi-rs-canvas-darwin-x64-npm-0.1.89-f9bc7fbda0/node_modules/@napi-rs/canvas-darwin-x64/",\
+        "packageDependencies": [\
+          ["@napi-rs/canvas-darwin-x64", "npm:0.1.89"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@napi-rs/canvas-linux-arm-gnueabihf", [\
+      ["npm:0.1.89", {\
+        "packageLocation": "./.yarn/unplugged/@napi-rs-canvas-linux-arm-gnueabihf-npm-0.1.89-35be531add/node_modules/@napi-rs/canvas-linux-arm-gnueabihf/",\
+        "packageDependencies": [\
+          ["@napi-rs/canvas-linux-arm-gnueabihf", "npm:0.1.89"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@napi-rs/canvas-linux-arm64-gnu", [\
+      ["npm:0.1.89", {\
+        "packageLocation": "./.yarn/unplugged/@napi-rs-canvas-linux-arm64-gnu-npm-0.1.89-50d6c8b0ab/node_modules/@napi-rs/canvas-linux-arm64-gnu/",\
+        "packageDependencies": [\
+          ["@napi-rs/canvas-linux-arm64-gnu", "npm:0.1.89"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@napi-rs/canvas-linux-arm64-musl", [\
+      ["npm:0.1.89", {\
+        "packageLocation": "./.yarn/unplugged/@napi-rs-canvas-linux-arm64-musl-npm-0.1.89-dffad82ed4/node_modules/@napi-rs/canvas-linux-arm64-musl/",\
+        "packageDependencies": [\
+          ["@napi-rs/canvas-linux-arm64-musl", "npm:0.1.89"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@napi-rs/canvas-linux-riscv64-gnu", [\
+      ["npm:0.1.89", {\
+        "packageLocation": "./.yarn/unplugged/@napi-rs-canvas-linux-riscv64-gnu-npm-0.1.89-2742008cbe/node_modules/@napi-rs/canvas-linux-riscv64-gnu/",\
+        "packageDependencies": [\
+          ["@napi-rs/canvas-linux-riscv64-gnu", "npm:0.1.89"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@napi-rs/canvas-linux-x64-gnu", [\
+      ["npm:0.1.89", {\
+        "packageLocation": "./.yarn/unplugged/@napi-rs-canvas-linux-x64-gnu-npm-0.1.89-6a85c348df/node_modules/@napi-rs/canvas-linux-x64-gnu/",\
+        "packageDependencies": [\
+          ["@napi-rs/canvas-linux-x64-gnu", "npm:0.1.89"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@napi-rs/canvas-linux-x64-musl", [\
+      ["npm:0.1.89", {\
+        "packageLocation": "./.yarn/unplugged/@napi-rs-canvas-linux-x64-musl-npm-0.1.89-338163b101/node_modules/@napi-rs/canvas-linux-x64-musl/",\
+        "packageDependencies": [\
+          ["@napi-rs/canvas-linux-x64-musl", "npm:0.1.89"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@napi-rs/canvas-win32-arm64-msvc", [\
+      ["npm:0.1.89", {\
+        "packageLocation": "./.yarn/unplugged/@napi-rs-canvas-win32-arm64-msvc-npm-0.1.89-a3c65adf90/node_modules/@napi-rs/canvas-win32-arm64-msvc/",\
+        "packageDependencies": [\
+          ["@napi-rs/canvas-win32-arm64-msvc", "npm:0.1.89"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@napi-rs/canvas-win32-x64-msvc", [\
+      ["npm:0.1.89", {\
+        "packageLocation": "./.yarn/unplugged/@napi-rs-canvas-win32-x64-msvc-npm-0.1.89-10bc8407d6/node_modules/@napi-rs/canvas-win32-x64-msvc/",\
+        "packageDependencies": [\
+          ["@napi-rs/canvas-win32-x64-msvc", "npm:0.1.89"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -1880,6 +2001,15 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["core-util-is", [\
+      ["npm:1.0.3", {\
+        "packageLocation": "../../Users/IBST_JAR/AppData/Local/Yarn/Berry/cache/core-util-is-npm-1.0.3-ca74b76c90-10c0.zip/node_modules/core-util-is/",\
+        "packageDependencies": [\
+          ["core-util-is", "npm:1.0.3"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["cross-spawn", [\
       ["npm:7.0.6", {\
         "packageLocation": "../../Users/IBST_JAR/AppData/Local/Yarn/Berry/cache/cross-spawn-npm-7.0.6-264bddf921-10c0.zip/node_modules/cross-spawn/",\
@@ -2485,6 +2615,15 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["immediate", [\
+      ["npm:3.0.6", {\
+        "packageLocation": "../../Users/IBST_JAR/AppData/Local/Yarn/Berry/cache/immediate-npm-3.0.6-c27588a2d3-10c0.zip/node_modules/immediate/",\
+        "packageDependencies": [\
+          ["immediate", "npm:3.0.6"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["import-fresh", [\
       ["npm:3.3.1", {\
         "packageLocation": "../../Users/IBST_JAR/AppData/Local/Yarn/Berry/cache/import-fresh-npm-3.3.1-1916794950-10c0.zip/node_modules/import-fresh/",\
@@ -2501,6 +2640,15 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "../../Users/IBST_JAR/AppData/Local/Yarn/Berry/cache/imurmurhash-npm-0.1.4-610c5068a0-10c0.zip/node_modules/imurmurhash/",\
         "packageDependencies": [\
           ["imurmurhash", "npm:0.1.4"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["inherits", [\
+      ["npm:2.0.4", {\
+        "packageLocation": "../../Users/IBST_JAR/AppData/Local/Yarn/Berry/cache/inherits-npm-2.0.4-c66b3957a0-10c0.zip/node_modules/inherits/",\
+        "packageDependencies": [\
+          ["inherits", "npm:2.0.4"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -2529,6 +2677,15 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["is-extglob", "npm:2.1.1"],\
           ["is-glob", "npm:4.0.3"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["isarray", [\
+      ["npm:1.0.0", {\
+        "packageLocation": "../../Users/IBST_JAR/AppData/Local/Yarn/Berry/cache/isarray-npm-1.0.0-db4f547720-10c0.zip/node_modules/isarray/",\
+        "packageDependencies": [\
+          ["isarray", "npm:1.0.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -2622,6 +2779,19 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["jszip", [\
+      ["npm:3.10.1", {\
+        "packageLocation": "../../Users/IBST_JAR/AppData/Local/Yarn/Berry/cache/jszip-npm-3.10.1-2862546cfb-10c0.zip/node_modules/jszip/",\
+        "packageDependencies": [\
+          ["jszip", "npm:3.10.1"],\
+          ["lie", "npm:3.3.0"],\
+          ["pako", "npm:1.0.11"],\
+          ["readable-stream", "npm:2.3.8"],\
+          ["setimmediate", "npm:1.0.5"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["keyv", [\
       ["npm:4.5.4", {\
         "packageLocation": "../../Users/IBST_JAR/AppData/Local/Yarn/Berry/cache/keyv-npm-4.5.4-4c8e2cf7f7-10c0.zip/node_modules/keyv/",\
@@ -2639,6 +2809,16 @@ const RAW_RUNTIME_STATE =
           ["levn", "npm:0.4.1"],\
           ["prelude-ls", "npm:1.2.1"],\
           ["type-check", "npm:0.4.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["lie", [\
+      ["npm:3.3.0", {\
+        "packageLocation": "../../Users/IBST_JAR/AppData/Local/Yarn/Berry/cache/lie-npm-3.3.0-35ddd11a4d-10c0.zip/node_modules/lie/",\
+        "packageDependencies": [\
+          ["immediate", "npm:3.0.6"],\
+          ["lie", "npm:3.3.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -3012,6 +3192,15 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["node-readable-to-web-readable-stream", [\
+      ["npm:0.4.2", {\
+        "packageLocation": "../../Users/IBST_JAR/AppData/Local/Yarn/Berry/cache/node-readable-to-web-readable-stream-npm-0.4.2-e9cd282b1e-10c0.zip/node_modules/node-readable-to-web-readable-stream/",\
+        "packageDependencies": [\
+          ["node-readable-to-web-readable-stream", "npm:0.4.2"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["node-releases", [\
       ["npm:2.0.27", {\
         "packageLocation": "../../Users/IBST_JAR/AppData/Local/Yarn/Berry/cache/node-releases-npm-2.0.27-b2d1b8de4a-10c0.zip/node_modules/node-releases/",\
@@ -3075,6 +3264,15 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["pako", [\
+      ["npm:1.0.11", {\
+        "packageLocation": "../../Users/IBST_JAR/AppData/Local/Yarn/Berry/cache/pako-npm-1.0.11-b8f1b69d3e-10c0.zip/node_modules/pako/",\
+        "packageDependencies": [\
+          ["pako", "npm:1.0.11"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["parent-module", [\
       ["npm:1.0.1", {\
         "packageLocation": "../../Users/IBST_JAR/AppData/Local/Yarn/Berry/cache/parent-module-npm-1.0.1-1fae11b095-10c0.zip/node_modules/parent-module/",\
@@ -3130,8 +3328,10 @@ const RAW_RUNTIME_STATE =
           ["eslint-plugin-react-hooks", "virtual:97377d34c56a5412352ef20a68b7b9c597424b52160ae93c13e43d8bde1d2cbcb278f018a9fda42e96b3734f938cb81096b2a4dc17b62e538eb309cfd1f93975#npm:7.0.1"],\
           ["eslint-plugin-react-refresh", "virtual:97377d34c56a5412352ef20a68b7b9c597424b52160ae93c13e43d8bde1d2cbcb278f018a9fda42e96b3734f938cb81096b2a4dc17b62e538eb309cfd1f93975#npm:0.4.26"],\
           ["globals", "npm:16.5.0"],\
+          ["jszip", "npm:3.10.1"],\
           ["lucide-react", "virtual:97377d34c56a5412352ef20a68b7b9c597424b52160ae93c13e43d8bde1d2cbcb278f018a9fda42e96b3734f938cb81096b2a4dc17b62e538eb309cfd1f93975#npm:0.563.0"],\
           ["pdf-to-image", "workspace:."],\
+          ["pdfjs-dist", "npm:5.4.624"],\
           ["react", "npm:19.2.4"],\
           ["react-dom", "virtual:97377d34c56a5412352ef20a68b7b9c597424b52160ae93c13e43d8bde1d2cbcb278f018a9fda42e96b3734f938cb81096b2a4dc17b62e538eb309cfd1f93975#npm:19.2.4"],\
           ["tailwind-merge", "npm:3.4.0"],\
@@ -3142,6 +3342,17 @@ const RAW_RUNTIME_STATE =
           ["vite", "virtual:97377d34c56a5412352ef20a68b7b9c597424b52160ae93c13e43d8bde1d2cbcb278f018a9fda42e96b3734f938cb81096b2a4dc17b62e538eb309cfd1f93975#npm:7.3.1"]\
         ],\
         "linkType": "SOFT"\
+      }]\
+    ]],\
+    ["pdfjs-dist", [\
+      ["npm:5.4.624", {\
+        "packageLocation": "../../Users/IBST_JAR/AppData/Local/Yarn/Berry/cache/pdfjs-dist-npm-5.4.624-72defc6149-10c0.zip/node_modules/pdfjs-dist/",\
+        "packageDependencies": [\
+          ["@napi-rs/canvas", "npm:0.1.89"],\
+          ["node-readable-to-web-readable-stream", "npm:0.4.2"],\
+          ["pdfjs-dist", "npm:5.4.624"]\
+        ],\
+        "linkType": "HARD"\
       }]\
     ]],\
     ["picocolors", [\
@@ -3188,6 +3399,15 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "../../Users/IBST_JAR/AppData/Local/Yarn/Berry/cache/proc-log-npm-6.1.0-84e609b3f4-10c0.zip/node_modules/proc-log/",\
         "packageDependencies": [\
           ["proc-log", "npm:6.1.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["process-nextick-args", [\
+      ["npm:2.0.1", {\
+        "packageLocation": "../../Users/IBST_JAR/AppData/Local/Yarn/Berry/cache/process-nextick-args-npm-2.0.1-b8d7971609-10c0.zip/node_modules/process-nextick-args/",\
+        "packageDependencies": [\
+          ["process-nextick-args", "npm:2.0.1"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -3253,6 +3473,22 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["readable-stream", [\
+      ["npm:2.3.8", {\
+        "packageLocation": "../../Users/IBST_JAR/AppData/Local/Yarn/Berry/cache/readable-stream-npm-2.3.8-67a94c2cb1-10c0.zip/node_modules/readable-stream/",\
+        "packageDependencies": [\
+          ["core-util-is", "npm:1.0.3"],\
+          ["inherits", "npm:2.0.4"],\
+          ["isarray", "npm:1.0.0"],\
+          ["process-nextick-args", "npm:2.0.1"],\
+          ["readable-stream", "npm:2.3.8"],\
+          ["safe-buffer", "npm:5.1.2"],\
+          ["string_decoder", "npm:1.1.1"],\
+          ["util-deprecate", "npm:1.0.2"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["resolve-from", [\
       ["npm:4.0.0", {\
         "packageLocation": "../../Users/IBST_JAR/AppData/Local/Yarn/Berry/cache/resolve-from-npm-4.0.0-f758ec21bf-10c0.zip/node_modules/resolve-from/",\
@@ -3307,6 +3543,15 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["safe-buffer", [\
+      ["npm:5.1.2", {\
+        "packageLocation": "../../Users/IBST_JAR/AppData/Local/Yarn/Berry/cache/safe-buffer-npm-5.1.2-c27fedf6c4-10c0.zip/node_modules/safe-buffer/",\
+        "packageDependencies": [\
+          ["safe-buffer", "npm:5.1.2"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["safer-buffer", [\
       ["npm:2.1.2", {\
         "packageLocation": "../../Users/IBST_JAR/AppData/Local/Yarn/Berry/cache/safer-buffer-npm-2.1.2-8d5c0b705e-10c0.zip/node_modules/safer-buffer/",\
@@ -3337,6 +3582,15 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "../../Users/IBST_JAR/AppData/Local/Yarn/Berry/cache/semver-npm-7.7.3-9cf7b3b46c-10c0.zip/node_modules/semver/",\
         "packageDependencies": [\
           ["semver", "npm:7.7.3"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["setimmediate", [\
+      ["npm:1.0.5", {\
+        "packageLocation": "../../Users/IBST_JAR/AppData/Local/Yarn/Berry/cache/setimmediate-npm-1.0.5-54587459b6-10c0.zip/node_modules/setimmediate/",\
+        "packageDependencies": [\
+          ["setimmediate", "npm:1.0.5"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -3407,6 +3661,16 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["minipass", "npm:7.1.2"],\
           ["ssri", "npm:13.0.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["string_decoder", [\
+      ["npm:1.1.1", {\
+        "packageLocation": "../../Users/IBST_JAR/AppData/Local/Yarn/Berry/cache/string_decoder-npm-1.1.1-e46a6c1353-10c0.zip/node_modules/string_decoder/",\
+        "packageDependencies": [\
+          ["safe-buffer", "npm:5.1.2"],\
+          ["string_decoder", "npm:1.1.1"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -3630,6 +3894,15 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["punycode", "npm:2.3.1"],\
           ["uri-js", "npm:4.4.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["util-deprecate", [\
+      ["npm:1.0.2", {\
+        "packageLocation": "../../Users/IBST_JAR/AppData/Local/Yarn/Berry/cache/util-deprecate-npm-1.0.2-e3fe1a219c-10c0.zip/node_modules/util-deprecate/",\
+        "packageDependencies": [\
+          ["util-deprecate", "npm:1.0.2"]\
         ],\
         "linkType": "HARD"\
       }]\
