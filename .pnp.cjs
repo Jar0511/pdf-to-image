@@ -46,12 +46,14 @@ const RAW_RUNTIME_STATE =
           ["pdfjs-dist", "npm:5.4.624"],\
           ["react", "npm:19.2.4"],\
           ["react-dom", "virtual:97377d34c56a5412352ef20a68b7b9c597424b52160ae93c13e43d8bde1d2cbcb278f018a9fda42e96b3734f938cb81096b2a4dc17b62e538eb309cfd1f93975#npm:19.2.4"],\
+          ["react-hook-form", "virtual:97377d34c56a5412352ef20a68b7b9c597424b52160ae93c13e43d8bde1d2cbcb278f018a9fda42e96b3734f938cb81096b2a4dc17b62e538eb309cfd1f93975#npm:7.71.1"],\
           ["tailwind-merge", "npm:3.4.0"],\
           ["tailwindcss", "npm:4.1.18"],\
           ["tw-animate-css", "npm:1.4.0"],\
           ["typescript", "patch:typescript@npm%3A5.9.3#optional!builtin<compat/typescript>::version=5.9.3&hash=5786d5"],\
           ["typescript-eslint", "virtual:97377d34c56a5412352ef20a68b7b9c597424b52160ae93c13e43d8bde1d2cbcb278f018a9fda42e96b3734f938cb81096b2a4dc17b62e538eb309cfd1f93975#npm:8.54.0"],\
-          ["vite", "virtual:97377d34c56a5412352ef20a68b7b9c597424b52160ae93c13e43d8bde1d2cbcb278f018a9fda42e96b3734f938cb81096b2a4dc17b62e538eb309cfd1f93975#npm:7.3.1"]\
+          ["vite", "virtual:97377d34c56a5412352ef20a68b7b9c597424b52160ae93c13e43d8bde1d2cbcb278f018a9fda42e96b3734f938cb81096b2a4dc17b62e538eb309cfd1f93975#npm:7.3.1"],\
+          ["zod", "npm:4.3.6"]\
         ],\
         "linkType": "SOFT"\
       }]\
@@ -3334,12 +3336,14 @@ const RAW_RUNTIME_STATE =
           ["pdfjs-dist", "npm:5.4.624"],\
           ["react", "npm:19.2.4"],\
           ["react-dom", "virtual:97377d34c56a5412352ef20a68b7b9c597424b52160ae93c13e43d8bde1d2cbcb278f018a9fda42e96b3734f938cb81096b2a4dc17b62e538eb309cfd1f93975#npm:19.2.4"],\
+          ["react-hook-form", "virtual:97377d34c56a5412352ef20a68b7b9c597424b52160ae93c13e43d8bde1d2cbcb278f018a9fda42e96b3734f938cb81096b2a4dc17b62e538eb309cfd1f93975#npm:7.71.1"],\
           ["tailwind-merge", "npm:3.4.0"],\
           ["tailwindcss", "npm:4.1.18"],\
           ["tw-animate-css", "npm:1.4.0"],\
           ["typescript", "patch:typescript@npm%3A5.9.3#optional!builtin<compat/typescript>::version=5.9.3&hash=5786d5"],\
           ["typescript-eslint", "virtual:97377d34c56a5412352ef20a68b7b9c597424b52160ae93c13e43d8bde1d2cbcb278f018a9fda42e96b3734f938cb81096b2a4dc17b62e538eb309cfd1f93975#npm:8.54.0"],\
-          ["vite", "virtual:97377d34c56a5412352ef20a68b7b9c597424b52160ae93c13e43d8bde1d2cbcb278f018a9fda42e96b3734f938cb81096b2a4dc17b62e538eb309cfd1f93975#npm:7.3.1"]\
+          ["vite", "virtual:97377d34c56a5412352ef20a68b7b9c597424b52160ae93c13e43d8bde1d2cbcb278f018a9fda42e96b3734f938cb81096b2a4dc17b62e538eb309cfd1f93975#npm:7.3.1"],\
+          ["zod", "npm:4.3.6"]\
         ],\
         "linkType": "SOFT"\
       }]\
@@ -3456,6 +3460,28 @@ const RAW_RUNTIME_STATE =
           ["react", "npm:19.2.4"],\
           ["react-dom", "virtual:97377d34c56a5412352ef20a68b7b9c597424b52160ae93c13e43d8bde1d2cbcb278f018a9fda42e96b3734f938cb81096b2a4dc17b62e538eb309cfd1f93975#npm:19.2.4"],\
           ["scheduler", "npm:0.27.0"]\
+        ],\
+        "packagePeers": [\
+          "@types/react",\
+          "react"\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["react-hook-form", [\
+      ["npm:7.71.1", {\
+        "packageLocation": "../../Users/IBST_JAR/AppData/Local/Yarn/Berry/cache/react-hook-form-npm-7.71.1-f289626b9c-10c0.zip/node_modules/react-hook-form/",\
+        "packageDependencies": [\
+          ["react-hook-form", "npm:7.71.1"]\
+        ],\
+        "linkType": "SOFT"\
+      }],\
+      ["virtual:97377d34c56a5412352ef20a68b7b9c597424b52160ae93c13e43d8bde1d2cbcb278f018a9fda42e96b3734f938cb81096b2a4dc17b62e538eb309cfd1f93975#npm:7.71.1", {\
+        "packageLocation": "./.yarn/__virtual__/react-hook-form-virtual-ddbb05c7fc/3/Users/IBST_JAR/AppData/Local/Yarn/Berry/cache/react-hook-form-npm-7.71.1-f289626b9c-10c0.zip/node_modules/react-hook-form/",\
+        "packageDependencies": [\
+          ["@types/react", "npm:19.2.10"],\
+          ["react", "npm:19.2.4"],\
+          ["react-hook-form", "virtual:97377d34c56a5412352ef20a68b7b9c597424b52160ae93c13e43d8bde1d2cbcb278f018a9fda42e96b3734f938cb81096b2a4dc17b62e538eb309cfd1f93975#npm:7.71.1"]\
         ],\
         "packagePeers": [\
           "@types/react",\
