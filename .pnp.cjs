@@ -29,6 +29,7 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./",\
         "packageDependencies": [\
           ["@eslint/js", "npm:9.39.2"],\
+          ["@hookform/resolvers", "virtual:97377d34c56a5412352ef20a68b7b9c597424b52160ae93c13e43d8bde1d2cbcb278f018a9fda42e96b3734f938cb81096b2a4dc17b62e538eb309cfd1f93975#npm:5.2.2"],\
           ["@radix-ui/react-label", "virtual:97377d34c56a5412352ef20a68b7b9c597424b52160ae93c13e43d8bde1d2cbcb278f018a9fda42e96b3734f938cb81096b2a4dc17b62e538eb309cfd1f93975#npm:2.1.8"],\
           ["@radix-ui/react-radio-group", "virtual:97377d34c56a5412352ef20a68b7b9c597424b52160ae93c13e43d8bde1d2cbcb278f018a9fda42e96b3734f938cb81096b2a4dc17b62e538eb309cfd1f93975#npm:1.3.8"],\
           ["@radix-ui/react-slider", "virtual:97377d34c56a5412352ef20a68b7b9c597424b52160ae93c13e43d8bde1d2cbcb278f018a9fda42e96b3734f938cb81096b2a4dc17b62e538eb309cfd1f93975#npm:1.3.6"],\
@@ -751,6 +752,29 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "../../Users/IBST_JAR/AppData/Local/Yarn/Berry/cache/@floating-ui-utils-npm-0.2.10-5e22e99242-10c0.zip/node_modules/@floating-ui/utils/",\
         "packageDependencies": [\
           ["@floating-ui/utils", "npm:0.2.10"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@hookform/resolvers", [\
+      ["npm:5.2.2", {\
+        "packageLocation": "../../Users/IBST_JAR/AppData/Local/Yarn/Berry/cache/@hookform-resolvers-npm-5.2.2-56cc31b72d-10c0.zip/node_modules/@hookform/resolvers/",\
+        "packageDependencies": [\
+          ["@hookform/resolvers", "npm:5.2.2"]\
+        ],\
+        "linkType": "SOFT"\
+      }],\
+      ["virtual:97377d34c56a5412352ef20a68b7b9c597424b52160ae93c13e43d8bde1d2cbcb278f018a9fda42e96b3734f938cb81096b2a4dc17b62e538eb309cfd1f93975#npm:5.2.2", {\
+        "packageLocation": "./.yarn/__virtual__/@hookform-resolvers-virtual-0dd38ad1d8/3/Users/IBST_JAR/AppData/Local/Yarn/Berry/cache/@hookform-resolvers-npm-5.2.2-56cc31b72d-10c0.zip/node_modules/@hookform/resolvers/",\
+        "packageDependencies": [\
+          ["@hookform/resolvers", "virtual:97377d34c56a5412352ef20a68b7b9c597424b52160ae93c13e43d8bde1d2cbcb278f018a9fda42e96b3734f938cb81096b2a4dc17b62e538eb309cfd1f93975#npm:5.2.2"],\
+          ["@standard-schema/utils", "npm:0.3.0"],\
+          ["@types/react-hook-form", null],\
+          ["react-hook-form", "virtual:97377d34c56a5412352ef20a68b7b9c597424b52160ae93c13e43d8bde1d2cbcb278f018a9fda42e96b3734f938cb81096b2a4dc17b62e538eb309cfd1f93975#npm:7.71.1"]\
+        ],\
+        "packagePeers": [\
+          "@types/react-hook-form",\
+          "react-hook-form"\
         ],\
         "linkType": "HARD"\
       }]\
@@ -3097,6 +3121,15 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["@standard-schema/utils", [\
+      ["npm:0.3.0", {\
+        "packageLocation": "../../Users/IBST_JAR/AppData/Local/Yarn/Berry/cache/@standard-schema-utils-npm-0.3.0-37537c524c-10c0.zip/node_modules/@standard-schema/utils/",\
+        "packageDependencies": [\
+          ["@standard-schema/utils", "npm:0.3.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["@tailwindcss/node", [\
       ["npm:4.1.18", {\
         "packageLocation": "../../Users/IBST_JAR/AppData/Local/Yarn/Berry/cache/@tailwindcss-node-npm-4.1.18-465ae5dca0-10c0.zip/node_modules/@tailwindcss/node/",\
@@ -5243,6 +5276,7 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./",\
         "packageDependencies": [\
           ["@eslint/js", "npm:9.39.2"],\
+          ["@hookform/resolvers", "virtual:97377d34c56a5412352ef20a68b7b9c597424b52160ae93c13e43d8bde1d2cbcb278f018a9fda42e96b3734f938cb81096b2a4dc17b62e538eb309cfd1f93975#npm:5.2.2"],\
           ["@radix-ui/react-label", "virtual:97377d34c56a5412352ef20a68b7b9c597424b52160ae93c13e43d8bde1d2cbcb278f018a9fda42e96b3734f938cb81096b2a4dc17b62e538eb309cfd1f93975#npm:2.1.8"],\
           ["@radix-ui/react-radio-group", "virtual:97377d34c56a5412352ef20a68b7b9c597424b52160ae93c13e43d8bde1d2cbcb278f018a9fda42e96b3734f938cb81096b2a4dc17b62e538eb309cfd1f93975#npm:1.3.8"],\
           ["@radix-ui/react-slider", "virtual:97377d34c56a5412352ef20a68b7b9c597424b52160ae93c13e43d8bde1d2cbcb278f018a9fda42e96b3734f938cb81096b2a4dc17b62e538eb309cfd1f93975#npm:1.3.6"],\
