@@ -120,7 +120,6 @@ function ConvertForm() {
 
   const pageMode = watch("pageMode")
   const format = watch("format")
-  const pageRange = watch("pageRange")
   const quality = watch("quality")
   const dpi = watch("dpi")
 
