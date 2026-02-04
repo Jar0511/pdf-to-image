@@ -1,7 +1,8 @@
-﻿import { useEffect, useMemo } from "react"
-import { Controller, useForm } from "react-hook-form"
+﻿import { Controller, useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
+import * as pdfjsLib from "pdfjs-dist"
+import JSZip from "jszip"
 import {
   Card,
   CardAction,
@@ -25,7 +26,6 @@ type ConvertFormValues = {
   format: "png" | "jpeg"
   quality: number | null
   dpi: number
-  exportMode: "single" | "zip"
 }
 
 const convertFormSchema = z
@@ -42,7 +42,6 @@ const convertFormSchema = z
     format: z.enum(["png", "jpeg"]),
     quality: z.number().min(60).max(100).nullable(),
     dpi: z.number().min(100).max(600),
-    exportMode: z.enum(["single", "zip"]),
   })
   .refine(
     (values) => (values.pageMode === "range" ? values.pageRange.trim().length > 0 : true),
@@ -99,22 +98,14 @@ const convertFormSchema = z
     path: ["quality"],
   })
 
-function normalizeRangeInput(value: string) {
-  return value.replace(/\s+/g, "")
-}
-
-function hasMultiplePages(rangeInput: string) {
-  if (!rangeInput) return false
-  return /[,-]/.test(rangeInput)
-}
-
 function ConvertForm() {
   const {
     control,
     watch,
-    setValue,
     handleSubmit,
-    formState: { errors },
+    setError,
+    clearErrors,
+    formState: { errors, isSubmitting },
   } = useForm<ConvertFormValues>({
     resolver: zodResolver(convertFormSchema),
     defaultValues: {
@@ -124,7 +115,6 @@ function ConvertForm() {
       format: "png",
       quality: 90,
       dpi: 200,
-      exportMode: "single",
     },
   })
 
@@ -133,22 +123,149 @@ function ConvertForm() {
   const pageRange = watch("pageRange")
   const quality = watch("quality")
   const dpi = watch("dpi")
-  const exportMode = watch("exportMode")
 
-  const normalizedRange = useMemo(() => normalizeRangeInput(pageRange ?? ""), [pageRange])
-  const isMultipleRange = pageMode === "range" && hasMultiplePages(normalizedRange)
-  const exportLockedToZip = isMultipleRange
   const showQuality = format === "jpeg"
 
-  const onSubmit = (values: ConvertFormValues) => {
-    console.log(values)
+  const parsePageRange = (input: string, maxPages: number) => {
+    const normalized = input.replace(/\s+/g, "")
+    if (!normalized) return { pages: [] as number[], invalid: true }
+    const tokens = normalized.split(",")
+    const pages: number[] = []
+
+    for (const token of tokens) {
+      const parts = token.split("-")
+      if (parts.length === 1) {
+        const value = Number(parts[0])
+        if (!Number.isInteger(value) || value < 1 || value > maxPages) {
+          return { pages: [], invalid: true }
+        }
+        pages.push(value)
+        continue
+      }
+      if (parts.length === 2) {
+        const start = Number(parts[0])
+        const end = Number(parts[1])
+        if (
+          !Number.isInteger(start) ||
+          !Number.isInteger(end) ||
+          start < 1 ||
+          end < 1 ||
+          start > end ||
+          end > maxPages
+        ) {
+          return { pages: [], invalid: true }
+        }
+        for (let page = start; page <= end; page += 1) {
+          pages.push(page)
+        }
+        continue
+      }
+      return { pages: [], invalid: true }
+    }
+
+    const uniquePages = Array.from(new Set(pages)).sort((a, b) => a - b)
+    return { pages: uniquePages, invalid: uniquePages.length === 0 }
   }
 
-  useEffect(() => {
-    if (exportLockedToZip) {
-      setValue("exportMode", "zip")
+  const onSubmit = async (values: ConvertFormValues) => {
+    clearErrors("pageRange")
+
+    const worker = new Worker(new URL("pdfjs-dist/build/pdf.worker.mjs", import.meta.url), {
+      type: "module",
+    })
+    pdfjsLib.GlobalWorkerOptions.workerPort = worker
+
+    try {
+      if (!values.file) {
+        setError("file", { type: "manual", message: "PDF 파일을 선택해주세요." })
+        return
+      }
+
+      const data = await values.file.arrayBuffer()
+      const pdfDocument = await pdfjsLib.getDocument({ data }).promise
+      const totalPages = pdfDocument.numPages
+
+      let targetPages: number[] = []
+      if (values.pageMode === "range") {
+        const parsed = parsePageRange(values.pageRange, totalPages)
+        if (parsed.invalid) {
+          setError("pageRange", {
+            type: "manual",
+            message: `페이지 범위는 1부터 ${totalPages} 사이여야 합니다.`,
+          })
+          return
+        }
+        targetPages = parsed.pages
+      } else {
+        targetPages = Array.from({ length: totalPages }, (_, index) => index + 1)
+      }
+
+      const zip = new JSZip()
+      const extension = values.format === "jpeg" ? "jpg" : "png"
+      const mimeType = values.format === "jpeg" ? "image/jpeg" : "image/png"
+      const scale = values.dpi / 72
+
+      const concurrency = Math.min(4, targetPages.length)
+      let cursor = 0
+
+      const renderPage = async (pageNumber: number) => {
+        const page = await pdfDocument.getPage(pageNumber)
+        const viewport = page.getViewport({ scale })
+        const canvas = document.createElement("canvas")
+        const context = canvas.getContext("2d")
+
+        if (!context) {
+          throw new Error("Canvas rendering context를 만들 수 없습니다.")
+        }
+
+        canvas.width = Math.ceil(viewport.width)
+        canvas.height = Math.ceil(viewport.height)
+
+        await page.render({ canvasContext: context, canvas, viewport }).promise
+
+        const blob = await new Promise<Blob>((resolve, reject) => {
+          canvas.toBlob(
+            (result) => {
+              if (!result) {
+                reject(new Error("이미지 생성에 실패했습니다."))
+                return
+              }
+              resolve(result)
+            },
+            mimeType,
+            values.format === "jpeg" ? (values.quality ?? 90) / 100 : undefined
+          )
+        })
+
+        zip.file(`page-${pageNumber}.${extension}`, blob)
+      }
+
+      const workers = Array.from({ length: concurrency }, async () => {
+        while (cursor < targetPages.length) {
+          const pageNumber = targetPages[cursor]
+          cursor += 1
+          await renderPage(pageNumber)
+        }
+      })
+
+      await Promise.all(workers)
+
+      const zipBlob = await zip.generateAsync({ type: "blob" })
+      const url = URL.createObjectURL(zipBlob)
+      const anchor = document.createElement("a")
+      anchor.href = url
+      anchor.download = `${values.file.name.replace(/\.pdf$/i, "")}-images.zip`
+      anchor.click()
+      URL.revokeObjectURL(url)
+    } catch (error) {
+      setError("pageRange", {
+        type: "manual",
+        message: error instanceof Error ? error.message : "변환에 실패했습니다.",
+      })
+    } finally {
+      worker.terminate()
     }
-  }, [exportLockedToZip, setValue])
+  }
 
   return (
     <Card className="rounded-3xl bg-white/80 shadow-2xl dark:bg-slate-900/60">
@@ -183,6 +300,7 @@ function ConvertForm() {
                       accept="application/pdf"
                       className="h-9 border-slate-300 bg-white text-xs text-slate-900 file:text-xs file:font-medium dark:border-slate-800 dark:bg-slate-950/70 dark:text-slate-200"
                       aria-invalid={fieldState.invalid}
+                      disabled={isSubmitting}
                       onChange={(event) => field.onChange(event.target.files?.[0] ?? null)}
                     />
                   )}
@@ -201,6 +319,7 @@ function ConvertForm() {
                     onValueChange={field.onChange}
                     className="flex flex-wrap items-center gap-4"
                     aria-invalid={fieldState.invalid}
+                    disabled={isSubmitting}
                   >
                     <div className="flex items-center gap-2">
                       <RadioGroupItem value="all" id="page-all" />
@@ -226,7 +345,7 @@ function ConvertForm() {
                             placeholder="예: 1-5, 8, 10-12"
                             value={rangeField.value}
                             onChange={rangeField.onChange}
-                            disabled={pageMode !== "range"}
+                            disabled={pageMode !== "range" || isSubmitting}
                             aria-invalid={rangeState.invalid}
                           />
                         )}
@@ -247,133 +366,102 @@ function ConvertForm() {
             </div>
           </fieldset>
 
-        <div className="rounded-2xl border bg-slate-50/80 px-4 py-4 dark:bg-slate-950/80">
-          <p className="text-xs text-slate-500 dark:text-slate-400">이미지 포맷</p>
-          <Controller
-            control={control}
-            name="format"
-            render={({ field }) => (
-              <RadioGroup value={field.value} onValueChange={field.onChange} className="mt-3 grid gap-3">
-                <div className="flex items-center gap-2">
-                  <RadioGroupItem value="png" id="format-png" />
-                  <Label htmlFor="format-png" className="text-xs text-slate-700 dark:text-slate-200">
-                    PNG (무손실)
-                  </Label>
-                </div>
-                <div className="flex items-center gap-2">
-                  <RadioGroupItem value="jpeg" id="format-jpeg" />
-                  <Label htmlFor="format-jpeg" className="text-xs text-slate-700 dark:text-slate-200">
-                    JPEG (용량 절약)
-                  </Label>
-                </div>
-              </RadioGroup>
-            )}
-          />
-        </div>
-
-        <div className="rounded-2xl border bg-slate-50/80 px-4 py-4 dark:bg-slate-950/80">
-          <div className="flex items-center justify-between">
-            <p className="text-xs text-slate-500 dark:text-slate-400">품질 (JPEG)</p>
-            <span className="text-xs text-slate-600 dark:text-slate-300">
-              {showQuality ? `${quality ?? 0}%` : "JPEG 선택 필요"}
-            </span>
-          </div>
-          <div className="mt-3 min-h-[42px]">
+          <div className="rounded-2xl border bg-slate-50/80 px-4 py-4 dark:bg-slate-950/80">
+            <p className="text-xs text-slate-500 dark:text-slate-400">이미지 포맷</p>
             <Controller
               control={control}
-              name="quality"
-              render={({ field }) =>
-                showQuality ? (
-                  <Slider
-                    value={[field.value ?? 90]}
-                    min={60}
-                    max={100}
-                    step={5}
-                    onValueChange={(value) => field.onChange(value[0] ?? 90)}
-                  />
-                ) : (
-                  <div className="flex h-10 items-center justify-center rounded-lg border border-dashed text-[11px] text-slate-500 dark:text-slate-500">
-                    JPEG 선택 시 품질 슬라이더가 표시됩니다.
-                  </div>
-                )
-              }
-            />
-          </div>
-        </div>
-
-        <div className="rounded-2xl border bg-slate-50/80 px-4 py-4 md:col-span-2 dark:bg-slate-950/80">
-          <div className="flex items-center justify-between">
-            <p className="text-xs text-slate-500 dark:text-slate-400">해상도 (DPI)</p>
-            <span className="text-xs text-slate-600 dark:text-slate-300">{dpi} DPI</span>
-          </div>
-          <div className="mt-3">
-            <Controller
-              control={control}
-              name="dpi"
+              name="format"
               render={({ field }) => (
-                <Slider
-                  value={[field.value]}
-                  min={100}
-                  max={600}
-                  step={100}
-                  onValueChange={(value) => field.onChange(value[0] ?? 200)}
-                />
+                <RadioGroup
+                  value={field.value}
+                  onValueChange={field.onChange}
+                  className="mt-3 grid gap-3"
+                  disabled={isSubmitting}
+                >
+                  <div className="flex items-center gap-2">
+                    <RadioGroupItem value="png" id="format-png" />
+                    <Label htmlFor="format-png" className="text-xs text-slate-700 dark:text-slate-200">
+                      PNG (무손실)
+                    </Label>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <RadioGroupItem value="jpeg" id="format-jpeg" />
+                    <Label htmlFor="format-jpeg" className="text-xs text-slate-700 dark:text-slate-200">
+                      JPEG (용량 절약)
+                    </Label>
+                  </div>
+                </RadioGroup>
               )}
             />
           </div>
-          <div className="mt-3 flex justify-between text-[11px] text-slate-500 dark:text-slate-600">
-            {DPI_OPTIONS.map((option) => (
-              <span key={option}>{option}</span>
-            ))}
-          </div>
-        </div>
 
-        <div className="rounded-2xl border bg-slate-50/80 px-4 py-4 md:col-span-2 dark:bg-slate-950/80">
-          <div className="flex items-center justify-between">
-            <p className="text-xs text-slate-500 dark:text-slate-400">내보내기</p>
-            {exportLockedToZip && (
-              <span className="text-[11px] text-emerald-700 dark:text-emerald-200">
-                복수 페이지 선택 시 ZIP 고정
+          <div className="rounded-2xl border bg-slate-50/80 px-4 py-4 dark:bg-slate-950/80">
+            <div className="flex items-center justify-between">
+              <p className="text-xs text-slate-500 dark:text-slate-400">품질 (JPEG)</p>
+              <span className="text-xs text-slate-600 dark:text-slate-300">
+                {showQuality ? `${quality ?? 0}%` : "JPEG 선택 필요"}
               </span>
-            )}
+            </div>
+            <div className="mt-3 min-h-[42px]">
+              <Controller
+                control={control}
+                name="quality"
+                render={({ field }) =>
+                  showQuality ? (
+                    <Slider
+                      value={[field.value ?? 90]}
+                      min={60}
+                      max={100}
+                      step={5}
+                      onValueChange={(value) => field.onChange(value[0] ?? 90)}
+                      disabled={isSubmitting}
+                    />
+                  ) : (
+                    <div className="flex h-10 items-center justify-center rounded-lg border border-dashed text-[11px] text-slate-500 dark:text-slate-500">
+                      JPEG 선택 시 품질 슬라이더가 표시됩니다.
+                    </div>
+                  )
+                }
+              />
+            </div>
           </div>
-          <Controller
-            control={control}
-            name="exportMode"
-            render={({ field }) => (
-              <RadioGroup
-                value={exportLockedToZip ? "zip" : field.value}
-                onValueChange={(value) => {
-                  if (!exportLockedToZip) {
-                    field.onChange(value)
-                  }
-                }}
-                className="mt-3 flex flex-wrap items-center gap-4"
-              >
-                <div className="flex items-center gap-2">
-                  <RadioGroupItem value="single" id="export-single" disabled={exportLockedToZip} />
-                  <Label htmlFor="export-single" className="text-xs text-slate-700 dark:text-slate-200">
-                    개별 파일 다운로드
-                  </Label>
-                </div>
-                <div className="flex items-center gap-2">
-                  <RadioGroupItem value="zip" id="export-zip" />
-                  <Label htmlFor="export-zip" className="text-xs text-slate-700 dark:text-slate-200">
-                    ZIP 묶음 다운로드
-                  </Label>
-                </div>
-              </RadioGroup>
-            )}
-          />
-        </div>
+
+          <div className="rounded-2xl border bg-slate-50/80 px-4 py-4 md:col-span-2 dark:bg-slate-950/80">
+            <div className="flex items-center justify-between">
+              <p className="text-xs text-slate-500 dark:text-slate-400">해상도 (DPI)</p>
+              <span className="text-xs text-slate-600 dark:text-slate-300">{dpi} DPI</span>
+            </div>
+            <div className="mt-3">
+              <Controller
+                control={control}
+                name="dpi"
+                render={({ field }) => (
+                  <Slider
+                    value={[field.value]}
+                    min={100}
+                    max={600}
+                    step={100}
+                    onValueChange={(value) => field.onChange(value[0] ?? 200)}
+                    disabled={isSubmitting}
+                  />
+                )}
+              />
+            </div>
+            <div className="mt-3 flex justify-between text-[11px] text-slate-500 dark:text-slate-600">
+              {DPI_OPTIONS.map((option) => (
+                <span key={option}>{option}</span>
+              ))}
+            </div>
+          </div>
         </CardContent>
 
         <CardFooter className="flex-col items-stretch gap-3">
           <button
             type="submit"
             className="w-full rounded-2xl bg-emerald-500/90 py-3 text-sm font-semibold text-white transition hover:bg-emerald-500"
+            disabled={isSubmitting}
           >
-            변환 시작하기
+            {isSubmitting ? "변환 중..." : "변환 시작하기"}
           </button>
           <p className="text-center text-xs text-slate-500 dark:text-slate-500">
             에러 메시지와 설명 텍스트는 임시로 넣어둔 상태입니다.
